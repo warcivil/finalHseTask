@@ -25,13 +25,13 @@ def view_currency(value, old_currency, new_currency):
     money_on_bd = MoneyController.get_by_name(old_currency, new_currency)
 
     if(money_on_bd is None):
-        MoneyController.create_money_k(
-            old_currency, new_currency, r)
-
-        money_on_bd = MoneyController.get_by_name(old_currency, new_currency)
-        info = {get_money_name(old_currency, new_currency, "->"): float(value)*money_on_bd.koef}
+        money_on_bd_value = CurrencyConverter.add_currency(
+            float(value), old_currency, new_currency)
+        info = {get_money_name(old_currency, new_currency,
+                               "->"): money_on_bd_value}
     else:
-        info = {get_money_name(old_currency, new_currency, '->'): float(value)*money_on_bd.koef}
+        info = {get_money_name(old_currency, new_currency, '->')
+                               : CurrencyConverter.convert(float(value), old_currency, new_currency)}
     return info
 
 
@@ -53,6 +53,7 @@ def update_currency(old_currency, new_currency):
 def remove_currency(old_currency, new_currency):
     MoneyController.remove_currency(old_currency, new_currency)
     return jsonify(dict(status="OK"))
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
