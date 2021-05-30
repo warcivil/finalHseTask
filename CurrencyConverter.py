@@ -26,13 +26,11 @@ class CurrencyConverter:
         return loads(requests.get(f"https://free.currencyconverterapi.com/api/v6/convert?q={old_currency}_{new_currency}&compact=ultra&apiKey={settings.TOKEN}").text)
 
     @staticmethod
-    @catch
     def convert(values:float, old_currency:str, new_currency:str)->float:
         name_v = MoneyController.get_by_name(old_currency, new_currency)
         return values * name_v.koef
     
     @ staticmethod
-    @ catch
     def add_currency(values: float, old_currency: str, new_currency: str) -> float:
         "вычислить валюту в новой валюте"
         r=CurrencyConverter.get_request(old_currency, new_currency)
