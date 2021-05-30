@@ -1,20 +1,17 @@
 from models import Money
 from playhouse.shortcuts import model_to_dict, dict_to_model
-from help_methods import get_money_name
+from help_methods import get_money_name, catch
 
 class MoneyController():
     def __init__(self, name_m:str):
         self.name_m = Money.get_by_id(name_m)
 
     @staticmethod
+    @catch
     def create_money_k(old_money:str, new_money:str, koef:float)->Money:
-        try:
-            money = Money.get_or_create(
-                name_k=get_money_name(old_money, new_money), koef=koef)
-            return money
-        except Exception as e:
-            print(f"Fail: {e}")
-            return 0
+        money = Money.get_or_create(
+            name_k=get_money_name(old_money, new_money), koef=koef)
+        return money
 
     @staticmethod
     def get_all() -> list:

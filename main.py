@@ -64,7 +64,7 @@ def create_new_currency(ratio, old_currency, new_currency):
     q = MoneyController.create_money_k(
         old_currency, new_currency, float(ratio))
     return jsonify(dict(status="OK",
-                        create_new_currency=q.name_k
+                        create_new_currency=f"{old_currency} -> {new_currency}"
                         ))
 
 
