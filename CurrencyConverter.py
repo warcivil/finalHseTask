@@ -13,14 +13,6 @@ def if_file_exist() -> bool:
 
 
 class CurrencyConverter:
-    if(not if_file_exist()):
-        file = open("currency.json", "w")
-        file.write("{}")
-        file.close()
-
-    with open("currency.json", "r") as tranzaction_rules:
-        values_convert = loads(tranzaction_rules.read())
-
     @staticmethod
     def get_request(old_currency:str, new_currency:str) -> loads:
         return loads(requests.get(f"https://free.currencyconverterapi.com/api/v6/convert?q={old_currency}_{new_currency}&compact=ultra&apiKey={settings.TOKEN}").text)

@@ -3,7 +3,7 @@ from playhouse.shortcuts import model_to_dict, dict_to_model
 from help_methods import get_money_name
 
 class MoneyController():
-    def __init__(self, name_m):
+    def __init__(self, name_m:str):
         self.name_m = Money.get_by_id(name_m)
 
     @staticmethod
