@@ -51,7 +51,7 @@ def update_currency(old_currency, new_currency):
 @app.route("/old_currency=<old_currency>&new_currency=<new_currency>", methods=["DELETE"])
 @catch
 def remove_currency(old_currency, new_currency):
-    MoneyController.remove_currency(get_money_name(old_currency, new_currency))
+    MoneyController.remove_currency(old_currency, new_currency)
     return jsonify(dict(status="OK"))
 
 if __name__ == "__main__":

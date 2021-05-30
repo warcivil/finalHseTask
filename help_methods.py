@@ -2,7 +2,7 @@ from os import error
 from flask import jsonify
 
 
-def get_money_name(old, new, symbol="_"):
+def get_money_name(old:str, new:str, symbol="_")->str:
     return old+symbol+new
 
 

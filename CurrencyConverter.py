@@ -8,7 +8,7 @@ from json import loads
 # old/new currency - str
 
 
-def if_file_exist():
+def if_file_exist() -> bool:
     return os.path.exists("currency.json")
 
 
@@ -22,11 +22,11 @@ class CurrencyConverter:
         values_convert = loads(tranzaction_rules.read())
 
     @staticmethod
-    def get_request(old_currency, new_currency):
+    def get_request(old_currency:str, new_currency:str) -> loads:
         return loads(requests.get(f"https://free.currencyconverterapi.com/api/v6/convert?q={old_currency}_{new_currency}&compact=ultra&apiKey={settings.TOKEN}").text)
 
     @staticmethod
-    def convert(values, old_currency, new_currency):
+    def convert(values:float, old_currency:str, new_currency:str)->float:
         if(CurrencyConverter.values_convert.get(f"{old_currency}_{new_currency}") is not None):
             return values * CurrencyConverter.values_convert[f"{old_currency}_{new_currency}"]
         else:
